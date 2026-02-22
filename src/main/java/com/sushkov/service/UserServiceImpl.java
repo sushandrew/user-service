@@ -34,4 +34,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) throw new RuntimeException("Не существует пользователя с введенным id!");
         userDAO.delete(user);
     }
+
+    public void deleteAllUsers() {
+        userDAO.deleteAll();
+    }
 }

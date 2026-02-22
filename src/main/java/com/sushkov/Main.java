@@ -36,6 +36,9 @@ public class Main {
                 case "5":
                     deleteUser();
                     break;
+                case "6":
+                    deleteAllUsers();
+                    break;
                 case "0":
                     isRunning = false;
                     break;
@@ -54,6 +57,7 @@ public class Main {
                 3) Создание пользователя
                 4) Редактирование пользователя по id
                 5) Удаление пользователя по id
+                6) Удаление всех пользователей
                 0) Выход из программы""");
     }
 
@@ -140,6 +144,16 @@ public class Main {
         } catch (NumberFormatException e) {
             System.out.println("Число было введено в неверном формате!");
         } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void deleteAllUsers() {
+        System.out.println("------УДАЛЕНИЕ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ------");
+        try {
+            userService.deleteAllUsers();
+            System.out.println("Все пользователи были успешно удалены!");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

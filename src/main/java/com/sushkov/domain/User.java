@@ -3,6 +3,7 @@ package com.sushkov.domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -53,6 +54,10 @@ public class User {
         return age;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalDate getCreatedAt() {
         return createdAt;
     }
@@ -64,5 +69,22 @@ public class User {
                 email + "|" +
                 age + " лет|" +
                 "создано " + createdAt;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof User user)) return false;
+
+        return id == user.id && age == user.age && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(createdAt, user.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + Objects.hashCode(name);
+        result = 31 * result + Objects.hashCode(email);
+        result = 31 * result + age;
+        result = 31 * result + Objects.hashCode(createdAt);
+        return result;
     }
 }

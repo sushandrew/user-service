@@ -77,6 +77,22 @@ public class UserDAOImpl implements UserDAO{
         } finally {
             session.close();
         }
+    }
 
+    public void deleteAll() {
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction = session.getTransaction();
+        try {
+            transaction.begin();
+            session.createQuery("delete from User").executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
+            System.out.println(e.getMessage());
+        } finally {
+            session.close();
+        }
     }
 }
